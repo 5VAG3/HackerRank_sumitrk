@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+bool kaprenum(long a)
+{   int d=0;
+    long b=a;
+    while(b!=0)
+    { ++d;
+      b = b/10; } // To count the number of digits in the number.
+      
+    long c = a*a; // To store the square of the numner.
+    long rhalf=0; // To store the right half of the number.
+    for(int i=0; i<d; i++)
+    {
+      int m = c%10;
+      c = c/10;
+      rhalf+=m*pow(10,i);
+    }  // Obtaining the right half of "d" digits of the a*a.
+    b =a*a;
+    b = (b-rhalf)/pow(10,d); // Obtaining the left og the number.
+
+    return (b+rhalf==a);
+}
+
+void kaprekarNumbers(int p, int q) {
+int im=0;
+for(long i=p; i<=q; i++)
+{
+   if(kaprenum(i)){cout<<i<<" ";
+   ++im;}
+}
+if(im==0){cout<<"INVALID RANGE";}
+}
+
+int main()
+{
+    int p;
+    cin >> p;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    int q;
+    cin >> q;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    kaprekarNumbers(p, q);
+
+    return 0;
+}
