@@ -1,0 +1,56 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<int> serviceLane(int n,vector<int> a,vector<vector<int>> b)
+{   vector<int> ans(b.size());
+    for(int i=0; i<b.size(); ++i)
+    {
+        int min = 5;
+        int p = b[i][0], q = b[i][1];   // Setting the Starting and Ending point of the lane.
+
+        for(int j=p; j<=q; ++j)
+        {
+            if(a[j]<=min) { min = a[j]; }   // Traversing the provided range to find the min length.
+        }
+        ans[i] = min;     // Assigning the min vehicle size to the ans array.
+    }
+
+    return ans; 
+}
+
+int main()
+{
+    int n,t;
+    cin>>n;   // Getting the length of the service lane.
+    cin>>t;   // Getting the no. of test queries. 
+    
+ // Storing the lengths of the Service Lanes.
+    
+    vector <int> width(n,0);
+    for(int i=0; i<n; ++i)
+    {
+        cin>>width[i];
+    }
+    
+// Storing the Queries to test the lane for vehicle length.
+    
+    vector<vector<int>> cases(t);
+    for(int i=0; i<t; ++i)
+    {   
+        cases[i].resize(2);
+
+        for(int j=0; j<2; ++j)
+        {
+            cin>>cases[i][j];
+        }
+    }
+
+ // Printing the Result of the minimum lengths of vehicle.
+    vector<int> ans = serviceLane(n,width,cases);
+    for(int k=0; k<ans.size(); ++k)
+    {
+        cout<<ans[k]<<endl;
+    }
+}
